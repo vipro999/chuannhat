@@ -331,7 +331,7 @@ header h1{font-size:1.3rem;font-weight:700;text-align:center;position:absolute;l
 <div class="input-section" style="height:auto; margin-top:6px;">
   <form id="tiktokForm">
     <div class="search-box">
-      <input type="text" id="tiktokId" placeholder="Usernam" required />
+      <input type="text" id="tiktokId" placeholder="Username" required />
       <button type="submit" class="search-btn" title="Tìm kiếm">
         🔍
       </button>
@@ -482,7 +482,7 @@ const form = document.getElementById("tiktokForm");
     loading.textContent = "⏳";
 
     try {
-      const res = await fetch(`http://localhost:3000/api/tiktok?user=${encodeURIComponent(user)}`);
+      const res = await fetch(`https://chuannhat.vercel.app/api/tiktok?user=${encodeURIComponent(user)}`);
       const d = await res.json();
       loading.textContent = "";
 
@@ -652,3 +652,4 @@ document.onkeydown = e => {
 </script>
 </body>
 </html>
+
