@@ -1,0 +1,8 @@
+{
+  "name": "tiktok-api",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "puppeteer": "^23.0.0"
+  }
+}
