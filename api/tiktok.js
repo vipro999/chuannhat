@@ -1,3 +1,4 @@
+// api/tiktok.js
 import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
 
@@ -7,20 +8,24 @@ export default async function handler(req, res) {
 
   let browser;
   try {
-    // 🧩 Fix: đảm bảo có đường dẫn chrome hợp lệ
-    const executablePath = await chromium.executablePath || "/usr/bin/chromium-browser";
+    // Fix chromium config cho Vercel
+    chromium.setHeadlessMode = true;
+    chromium.setGraphicsMode = false;
+
+    const executablePath = await chromium.executablePath;
 
     browser = await puppeteer.launch({
-      args: [...chromium.args, "--no-sandbox", "--disable-setuid-sandbox"],
+      args: chromium.args,
       defaultViewport: chromium.defaultViewport,
       executablePath,
-      headless: true,
+      headless: chromium.headless,
     });
 
     const page = await browser.newPage();
     await page.setUserAgent(
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119 Safari/537.36"
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118 Safari/537.36"
     );
+
     await page.goto(`https://www.tiktok.com/@${user}`, {
       waitUntil: "domcontentloaded",
       timeout: 60000,
